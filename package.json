@@ -12,6 +12,8 @@
     "gulp": "^3.9.0"
   },
   "scripts": {
+    "start": "node app\\index.js",
+    "development": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
