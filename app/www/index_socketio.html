@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Socket.IO Demo</title>
+	</head>
+
+	<body>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+
+			document.addEventListener("DOMContentLoaded", function() {
+
+				var socket = io();
+
+				socket.on("ack", function(msg) {
+					console.log("ack: " + msg);
+				});
+
+				socket.emit("message", "Hello World!");
+
+			});
+
+		</script>
+
+	</body>
+
+</html>

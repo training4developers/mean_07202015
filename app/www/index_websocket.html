@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>WebSocket.IO Demo</title>
+	</head>
+
+	<body>
+
+		<script>
+
+			document.addEventListener("DOMContentLoaded", function() {
+
+				var webSocket = new WebSocket("ws://localhost:8080");
+
+				webSocket.addEventListener("message", function(message) {
+					console.log(message);
+				})
+
+				webSocket.addEventListener("close", function() {
+					console.log("web socket closed");
+				});
+
+				webSocket.addEventListener("open", function() {
+					webSocket.send("Hello World!");
+				});
+
+			});
+
+		</script>
+
+	</body>
+
+</html>

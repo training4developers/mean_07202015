@@ -1,0 +1,27 @@
+{
+  "name": "mean_07202015",
+  "version": "1.0.0",
+  "description": "Code demonstrations for MEAN class.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "express": "^4.13.1",
+    "socket.io": "^1.3.6",
+    "websocket.io": "^0.2.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/training4developers/mean_07202015.git"
+  },
+  "author": "Eric W. Greene",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/training4developers/mean_07202015/issues"
+  },
+  "homepage": "https://github.com/training4developers/mean_07202015#readme"
+}
