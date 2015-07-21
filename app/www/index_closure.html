@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome to MEAN!</title>
+	</head>
+	<body>
+		<script>
+
+			function outerFunc() {
+
+				var x = "Hi!";
+
+				return function myFunc() {
+					console.log(x);
+				};
+
+			}
+
+			var f = outerFunc();
+			f();
+
+		</script>
+	</body>
+</html>

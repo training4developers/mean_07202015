@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome to MEAN!</title>
+	</head>
+	<body>
+		<script>
+
+			$("button").on("click", function() {
+				// some code...
+			});
+
+			var o = {
+				firstName: "Bob",
+				lastName: "Smith",
+				getFullName: function() {
+					console.log(this.firstName + " " + this.lastName);
+				}
+			}
+
+			var f = o.getFullName.bind(o);
+
+			setTimeout(f, 2000);
+
+			o.getFullName();
+
+			//console.log(o.getFullName());
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome to MEAN!</title>
+	</head>
+	<body>
+		<script>
+
+			var baseObj = {
+				name: "BaseObj",
+				person: {
+					firstName: "John",
+					lastName: "Tyler"
+				}
+			};
+
+			var childObj = Object.create(baseObj);
+			var childObj2 = Object.create(baseObj);
+
+			childObj.person.firstName = "Chris";
+			childObj2.name = "ChildObj 2";
+			delete childObj.name;
+			delete childObj2.name;
+			baseObj.name = "Test";
+			console.log(baseObj.name);
+			console.log(childObj.name);
+			console.log(childObj2.name);
+			console.dir(childObj);
+			console.dir(Object.getPrototypeOf(childObj));
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome to MEAN!</title>
+	</head>
+	<body>
+		<script>
+
+			// IIFE - Immediately Invoked Function Expression
+			(function() {
+
+			})();
+
+			var x=0, y=0, funcs = [];
+
+			for (; x<5; x++) {
+				(function() {
+					var t = x;
+					funcs.push(function() {
+						console.log(t);
+					});
+				})();
+			}
+
+			for (; y<5; y++) {
+				funcs[y]();
+			}
+
+		</script>
+	</body>
+</html>

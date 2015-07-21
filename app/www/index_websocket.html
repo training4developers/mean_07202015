@@ -13,6 +13,7 @@
 			document.addEventListener("DOMContentLoaded", function() {
 
 				var webSocket = new WebSocket("ws://localhost:8080");
+				webSocket.send("Hello World!");
 
 				webSocket.addEventListener("message", function(message) {
 					console.log(message);

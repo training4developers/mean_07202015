@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome to MEAN!</title>
+	</head>
+	<body>
+		<script>
+
+			var x;
+
+			x = 2;
+			console.log(typeof x);
+
+			x = "Hi!";
+			console.log(typeof x);
+
+			x = true;
+			console.log(typeof x);
+
+			x = {
+				firstName: "Bob",
+				lastName: "Smith",
+				"date-of-birth": "12/12/1984"
+			};
+
+			x.placeOfBirth = "France";
+
+			console.log(x.firstName);
+			console.log(x["date-of-birth"]);
+			console.log(x.placeOfBirth);
+
+			console.log(typeof x);
+
+			x = [1,2,3];
+			console.log(typeof x);
+			
+
+		</script>
+	</body>
+</html>

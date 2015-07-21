@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome to MEAN!</title>
+	</head>
+	<body>
+		<script>
+
+			/*
+			$(function() {
+
+			});
+
+			$("#myDiv").html();
+
+			angular.module("MyApp", []) // registering a module
+			angular.module("MyApp") // retrieving a module
+			*/
+
+			function myFunc(a, b, c) {
+
+				console.dir([]);
+
+				console.dir(arguments);
+				console.log(a);
+				console.log(b);
+				console.log(c);
+			}
+
+			myFunc.someProp = "Some value";
+
+			myFunc(1,2,3,4);
+			//myFunc.$inject = ["$scope","$rootScope"];
+
+			console.dir(myFunc);
+
+			/*
+			var myArray = [1,2,3];
+			myArray.push(4);
+			myArray[1000] = 5;
+			myArray.someProp = "Hi Everyone!";
+			console.dir(myArray);
+			*/
+
+		</script>
+	</body>
+</html>

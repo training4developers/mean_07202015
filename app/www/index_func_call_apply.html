@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Welcome to MEAN!</title>
+	</head>
+	<body>
+		<script>
+
+			function myFunc(a, b) {
+				console.dir(this);
+			}
+
+			var o = {
+				myFunc: myFunc
+			};
+
+			//myFunc();
+			//o.myFunc();
+
+			myFunc.call({
+				id: 2
+			}, 2, 3);
+
+			myFunc.apply({
+				id: 3
+			}, [2, 3]);
+
+			var f = myFunc.bind({ id: 4});
+
+			f();
+
+		</script>
+	</body>
+</html>
