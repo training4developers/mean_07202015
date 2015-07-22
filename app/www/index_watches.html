@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to Angular.js!</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular.js"></script>
+	</head>
+
+	<body>
+		<div ng-app="MyApp">
+
+			<div ng-controller="MyCtrl">
+				{{message}}
+				<input ng-model="person.firstName">
+			</div>
+
+		</div>
+		<script>
+
+			angular.module("MyApp", [])
+				.controller("MyCtrl", function($scope, $timeout) {
+
+					$scope.person = {};
+					$scope.colors = ["red","white","blue"];
+
+					$scope.$watch("person.firstName", function(newValue, oldValue) {
+						console.log("person new value: " + newValue);
+						console.log("person old value: " + oldValue);
+					});
+
+					$scope.$watchCollection("colors", function(newValue, oldValue) {
+						console.log("colors new value: " + newValue);
+						console.log("colors old value: " + oldValue);
+					});
+
+					$timeout(function() {
+						console.log("added green");
+						$scope.colors.push("green");
+					}, 1000);
+
+					$timeout(function() {
+						console.log("added yellow");
+						$scope.colors.push("yellow");
+						console.dir($scope.colors);
+					}, 1000);
+
+				});
+
+
+		</script>
+	</body>
+
+</html>

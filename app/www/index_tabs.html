@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to Angular.js!</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular.js"></script>
+
+	</head>
+
+	<body>
+
+		<div ng-app="MyApp">
+			<div ng-controller="MyCtrl">
+
+				<tabs>
+					<tab id="tab1" caption="Tab 1">
+						Tab 1 Content...
+					</tab>
+					<tab id="tab2" caption="Tab 2">
+						Tab 2 Content...
+					</tab>
+					<tab id="tab3" caption="Tab 3">
+						Tab 3 Content...
+					</tab>
+					<tab id="tab4" caption="Tab 4">
+						Tab 4 Content...
+					</tab>
+					<tab id="tab5" caption="Tab 5">
+						Tab 5 Content...
+					</tab>
+				</tabs>
+
+			</div>
+		</div>
+		<script>
+
+			angular.module("MyApp", [])
+				.directive("tabs", function($compile) {
+
+					return {
+						restrict: "E",
+						controller: function($scope) {
+
+							$scope.tabs = [];
+							$scope.activeTab = "tab1";
+
+							this.addTab = function(tabId, tabCaption, tabContent) {
+
+								$scope.tabs.push({
+									tabId: tabId,
+									tabCaption: tabCaption,
+									tabContent: tabContent
+								});
+
+							}
+
+						},
+						link: function(scope, element, attrs) {
+
+							scope.activateTab = function(tabId) {
+								scope.activeTab = tabId;
+
+							}
+
+							var tpl = "<ul><li ng-repeat='tab in tabs' ng-click='activateTab(tab.tabId)'>{{tab.tabCaption}}</li></ul>"
+							tpl += "<div ng-repeat='tab in tabs' ng-if='activeTab === tab.tabId'>{{tab.tabContent}}</div>";
+							var linkingFn = $compile(tpl);
+							var domElements = linkingFn(scope);
+							element.empty().append(domElements);
+
+						}
+					}
+
+				})
+				.directive("tab", function() {
+
+					return {
+						restrict: "E",
+						require: "^tabs",
+						link: function(scope, element, attrs, ctrl) {
+							ctrl.addTab(attrs.id, attrs.caption, element.html());
+						}
+					}
+
+				})
+				.controller("MyCtrl", function($scope,$timeout) {
+
+				});
+
+		</script>
+
+	</body>
+
+</html>

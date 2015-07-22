@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to Angular.js!</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular.js"></script>
+
+			<style>
+
+				.red-box {
+					border: 3px solid red;
+				}
+
+			</style>
+
+	</head>
+
+	<body>
+
+		<div ng-app="MyApp">
+			<div ng-controller="MyCtrl">
+				<form name="contactForm" novalidate>
+					<label for="firstName">First Name:</label>
+					<input id="firstName" type="text" name="firstName" ng-model="person.firstName"><br>
+					<label for="lastName">Last Name:</label>
+					<input id="lastName" type="text" name="lastName" ng-model="person.lastName"><br>
+					<label for="age">Age:</label>
+					<input id="age" type="number" name="age" ng-model="person.age" ng-class="{'red-box':contactForm.age.$invalid}"><br>
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+		<script>
+
+			angular.module("MyApp", [])
+				.controller("MyCtrl", function($scope,$timeout) {
+
+					$scope.person = {};
+
+					$timeout(function() {
+						console.dir($scope);
+					}, 0);
+
+				});
+
+		</script>
+
+	</body>
+
+</html>

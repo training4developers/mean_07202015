@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Angular.js Class</title>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/q.js/1.4.0/q.js"></script>
+		<base href="/">
+	</head>
+
+	<body>
+
+		<div ng-app="MyApp">
+			<div ng-controller="MyCtrl">
+			</div>
+		</div>
+
+		<script>
+
+			angular.module("MyApp", [])
+				.constant("WebSocketURL", "ws://localhost:8080")
+				.factory("WebSocket", function(WebSocketURL) {
+
+					var d = Q.defer();
+
+					var ws = new WebSocket(WebSocketURL);
+					ws.addEventListener("open", function() {
+						d.resolve();
+					});
+
+					ws.addEventListener("error", function(err) {
+						d.reject(err);
+					});
+
+					return {
+						send: function(msg) {
+							return d.promise.then(function() {
+								ws.send(JSON.stringify(msg));
+							}, function(err) {
+								throw Error(err);
+							});
+						},
+						on: function(eventName, callbackFn) {
+							ws.addEventListener(eventName, callbackFn);
+							return this;
+						}
+					};
+
+				})
+				.factory("SocketLogger", function(WebSocket) {
+
+					return {
+						log: function(source, message, severity) {
+
+							var m = {
+								messageType: "log",
+								messageData: {
+									source: source,
+									message: message,
+									severity: severity
+								}
+							};
+
+							WebSocket.send(m);
+
+						}
+					};
+
+				})
+				.config(function($provide) {
+
+					$provide.decorator("$log", function($delegate, SocketLogger) {
+
+						var originalLog = $delegate.log;
+
+						$delegate.log = function(msg) {
+							SocketLogger.log("JavaScript", msg, 2);
+							originalLog(msg);
+						};
+
+						return $delegate;
+					});
+
+				})
+				.controller("MyCtrl", function(WebSocket, $log) {
+
+
+					WebSocket.on("message", function(msg) {
+						console.dir(msg);
+					}).on("error", function(err) {
+						console.error(err);
+					});
+
+
+					$log.log("Hi Class!");
+				});
+
+		</script>
+
+	</body>
+</html>
