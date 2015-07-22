@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Angular.js Demos</title>
+		<style>
+
+			input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
+				border: 2px solid red;
+			}
+
+		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>
+	</head>
+
+	<body>
+		<div ng-app="MyApp">
+			<div ng-controller="MyCtrl">
+				<form name="contactForm" novalidate>
+					<div>
+						<label for="first-name">First Name</label>
+						<input type="text" hp-required ng-model="contact.firstName" id="first-name" name="firstName">
+					</div>
+					<div>
+						<label for="last-name">Last Name</label>
+						<input type="text" ng-model="contact.lastName" id="last-name" name="lastName">
+					</div>
+
+					<button type="button" ng-click="showScope()">Send</button>
+				</form>
+			</div>
+		</div>
+
+		<script>
+
+			angular.module("MyApp", [])
+				.directive("hpRequired", function() {
+
+					return {
+						require: "ngModel",
+						restrict: "EA",
+						link: function(scope, element, attrs, ctrl) {
+
+							function validator(value) {
+
+								if (value != null && String(value).length > 0) {
+									ctrl.$setValidity("hp-required", true);
+									return value;
+								} else {
+									ctrl.$setValidity("hp-required", false);
+									return;
+								}
+
+
+							}
+
+							ctrl.$formatters.push(validator);
+							ctrl.$parsers.push(validator);
+						}
+					};
+
+				})
+				.controller("MyCtrl", function($scope, $timeout) {
+					$scope.contact = {};
+
+					$scope.showScope = function() {
+						console.dir($scope);
+					};
+
+					$timeout(function() {
+						console.dir($scope);
+					},0);
+				});
+
+		</script>
+
+	</body>
+</html>
